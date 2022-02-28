@@ -64,12 +64,13 @@
     <div class="wrapper" id="app">
 
       
-      <div class="card-form">
+      <form  @submit.prevent="handleSubmit" class="card-form">
         <div class="card-list">
           <h1 class="h1">Dados Pessoais</h1>
           <div class="card-input">
             <label for="cardNameFull" class="card-input__label">Nome Completo</label>
             <input type="text" id="cardName" class="card-input__input" v-model="cardNameFull" v-on:focus="focusInput" v-on:blur="blurInput" data-ref="cardNameFull" autocomplete="off">
+            <div v-if="submitted && !$v.cardNameFull.required" class="invalid-feedback">First Name is required</div>
 
           </div>
           <div class="card-input">
@@ -231,10 +232,10 @@
             </div>
           </div>
   
-          <button class="card-form__button">
-            Validar
+          <button type="submit" class="card-form__button">
+            Confirmar Pedido 
           </button>
-        </div>
+        </form>
       </div>
       
       
@@ -283,7 +284,7 @@
       </div>
     </form> -->
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/vuelidate@0.7.6/lib/index.min.js"></script>
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
   <script src="/js/script.js"></script>
 </body>
