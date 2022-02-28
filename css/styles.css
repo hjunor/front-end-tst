@@ -11,6 +11,12 @@ body {
   width: 80%;
 }
 
+@media screen and (max-width: 480px) {
+  .container {
+    width: 98%;
+  }
+}
+
 .header-container {
   margin: 0 auto;
   width: 80%;
@@ -30,7 +36,6 @@ body {
 @media screen and (max-width: 480px) {
   .header-container {
     width: 100%;
-    border: 1px solid red;
   }
 }
 
@@ -105,6 +110,17 @@ body {
   cursor: pointer;
 }
 
+.line {
+  display: none;
+}
+
+@media screen and (max-width: 480px) {
+  .line {
+    display: inline;
+    width: 100%;
+  }
+}
+
 .title-container {
   width: 80%;
   margin: 2rem auto;
@@ -115,6 +131,12 @@ body {
   font-weight: bold;
   color: #1a1a1a;
   padding-bottom: 1rem;
+}
+
+@media screen and (max-width: 480px) {
+  .title-container {
+    width: 98%;
+  }
 }
 
 .h1 {
@@ -156,7 +178,6 @@ body {
         grid-template-columns: 1fr;
     -webkit-box-shadow: none;
             box-shadow: none;
-    border: 1px solid red;
     width: 100%;
   }
 }
@@ -197,10 +218,9 @@ body {
 
 .product-description {
   width: 400px;
+  height: 50%;
   padding: 2rem 0.5rem;
   position: relative;
-  -webkit-transform: translateX(-30px);
-          transform: translateX(-30px);
   background: #ffffff;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -219,20 +239,40 @@ body {
   }
 }
 
+.price {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-top: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+@media screen and (max-width: 480px) {
+  .price {
+    width: 100vw;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    font-size: 2rem;
+  }
+}
+
 .product-description-list {
   width: 100%;
+  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   font-size: 1.5rem;
+  padding: 2rem 0;
 }
 
 .product-description-list strong {
-  text-align: justify;
-  font-weight: bold;
-  color: #1a1a1a;
-  padding-bottom: 0.5rem;
-  display: inline;
+  display: none;
 }
 
 .product-description-list p {
@@ -248,10 +288,15 @@ body {
   margin: 2rem 0;
 }
 
+.product-description-list:nth-child(1) {
+  font-weight: bold;
+}
+
 @media screen and (max-width: 480px) {
   .product-description-list {
     border-radius: 0.5rem;
     width: 300px;
+    font-size: 1rem;
   }
   .product-description-list strong {
     font-weight: bold;

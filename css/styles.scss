@@ -22,6 +22,9 @@ body {
 .container {
   margin: 0 auto;
   width: 80%;
+  @media screen and (max-width: 480px) {
+    width: 98%;
+  }
 }
 //header
 
@@ -37,7 +40,6 @@ body {
 
   @media screen and (max-width: 480px) {
     width: 100%;
-    border: 1px solid red;
   }
 }
 
@@ -90,6 +92,13 @@ body {
   }
 }
 
+.line {
+  display: none;
+  @media screen and (max-width: 480px) {
+    display: inline;
+    width: 100%;
+  }
+}
 // titulo principal
 
 .title-container {
@@ -101,6 +110,9 @@ body {
     font-weight: bold;
     color: $textColor;
     padding-bottom: 1rem;
+  }
+  @media screen and (max-width: 480px) {
+    width: 98%;
   }
 }
 
@@ -135,7 +147,6 @@ body {
   @media screen and (max-width: 480px) {
     grid-template-columns: 1fr;
     box-shadow: none;
-    border: 1px solid red;
     width: 100%;
   }
 }
@@ -164,9 +175,9 @@ body {
 }
 .product-description {
   width: 400px;
+  height: 50%;
   padding: 2rem 0.5rem;
   position: relative;
-  transform: translateX(-30px);
   background: $primaryColor;
   display: flex;
   flex-direction: column;
@@ -175,17 +186,28 @@ body {
     transform: translateX(0);
   }
 }
-
+.price {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+  @media screen and (max-width: 480px) {
+    width: 100vw;
+    justify-content: flex-start;
+    font-size: 2rem;
+  }
+}
 .product-description-list {
   width: 100%;
+  height: 100%;
   display: flex;
   font-size: 1.5rem;
+
+  padding: 2rem 0;
+
   strong {
-    text-align: justify;
-    font-weight: bold;
-    color: $textColor;
-    padding-bottom: 0.5rem;
-    display: inline;
+    display: none;
   }
   p {
     margin-left: 0.5rem;
@@ -197,10 +219,13 @@ body {
   hr {
     margin: 2rem 0;
   }
-
+  &:nth-child(1) {
+    font-weight: bold;
+  }
   @media screen and (max-width: 480px) {
     border-radius: 0.5rem;
     width: 300px;
+    font-size: 1rem;
 
     strong {
       font-weight: bold;
