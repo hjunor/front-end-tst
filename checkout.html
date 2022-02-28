@@ -1,45 +1,291 @@
-<!-- Título da janela -->
-Checkout RCHLO
+<!DOCTYPE html>
+<html lang="pt-br">
 
-<!-- Título da página (em destaque) -->
-Ótima escolha!
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/reset.css" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <title>Checkout | RCHLO</title>
+</head>
 
-<!-- Texto logo abaixo do título da página -->
-Obrigado por comprar na RCHLO! Preencha seus dados para efetivar a compra.
+<body>
 
-<!-- Subtítulo, referente ao trecho sobre os dados do produto -->
-Sua compra
+  <header>
+    <div class="header-container">
+      <div class="header-logo">
+        <a href="/">
+          <img src="/assets/svg/Group.svg" alt="logo" />
+        </a>
+      </div>
+      <div class="header-nav">
+        <ul>
+          <li class="welcome">Bem-vindo à Riachuelo</li>
+          <li class="ico-header">
+            <img src="https://midia.fotos-riachuelo.com.br/spa-storefront/public/images/ico-login.svg" alt="bag" />
+          </li>
+          <li class="ico-header">
+            <img src="https://midia.fotos-riachuelo.com.br/spa-storefront/public/images/ico-favoritos.svg" alt="bag" />
+          </li>
+          <li class="ico-header">
+            <img src="https://midia.fotos-riachuelo.com.br/spa-storefront/public/images/ico-sacola.svg" alt="bag" />
+          </li>
+        </ul>
+      </div>
+  </header>
 
-<!-- início dos dados do produto -->
-    <!-- imagem do produto -->
-    https://static.riachuelo.com.br/RCHLO/14247984003/portrait/279d0565feb361cff852a6a792ffdb5c89890ba3.jpg
+  <hr>
+  <div class="title-container">
+    <h1>Ótima escolha!</h1>
+    <p> Obrigado por comprar na RCHLO! Preencha seus dados para efetivar a compra.</p>
+  </div>
+  <h2 class="container title-box">Sua compra</h2>
 
-    <!-- nome do produto -->
-    Produto: Camiseta Manga Curta Malha Tie Dye The Simpsons Branco Riachuelo
+  <div class="box-product">
+    <div  class="product-container">
+      <div id="product-container ">
+        <img
+          class="product-image"
+          src=" https://static.riachuelo.com.br/RCHLO/14247984003/portrait/279d0565feb361cff852a6a792ffdb5c89890ba3.jpg"
+          alt="product">
+      </div>
+      <div class="product-description">
+        <div class="product-description-list"> <strong  >Produto: <span>Camiseta Manga Curta Malha Tie Dye The Simpsons Branco Riachuelo</span> </strong> </div>
+        <div class="product-description-list"> <strong>Cor: </strong> <p>Branco</p> </div>
+        <div class="product-description-list"> <strong>Tamanho: </strong> <p>G</p> </div>
+        <div class="product-description-list"><strong> Preço:</strong>  <p>R$ 69,90</p> </div>
+      </div>
+    </div>
+<!-- card credits -->
+    <div class="wrapper" id="app">
 
-    <!-- cor do produto -->
-    Cor: Branco
+      
+      <div class="card-form">
+        <div class="card-list">
+          <h1 class="h1">Dados Pessoais</h1>
+          <div class="card-input">
+            <label for="cardNameFull" class="card-input__label">Nome Completo</label>
+            <input type="text" id="cardName" class="card-input__input" v-model="cardNameFull" v-on:focus="focusInput" v-on:blur="blurInput" data-ref="cardNameFull" autocomplete="off">
 
-    <!-- tamanho do produto -->
-    Tamanho: G
+          </div>
+          <div class="card-input">
+            <label for="cardEmail" class="card-input__label">Email</label>
+            <input type="email" id="cardEmail" class="card-input__input" v-mask="generateCardNumberMask" v-model="cardEmail" v-on:focus="focusInput" v-on:blur="blurInput" data-ref="cardEmail" autocomplete="off">
+          </div>
+       
+          <div class="card-input">
+            <label for="cardDocument" class="card-input__label">CPF</label>
+            <input type="number" id="cardDocument" class="card-input__input" v-mask="generateCardNumberMask" v-model="cardDocument" v-on:focus="focusInput" v-on:blur="blurInput" data-ref="cardDocument" autocomplete="off">
+          </div>
+          <div class="card-item" v-bind:class="{ '-active' : isCardFlipped }">
+            <div class="card-item__side -front">
+              <div class="card-item__focus" v-bind:class="{'-active' : focusElementStyle }" v-bind:style="focusElementStyle" ref="focusElement"></div>
+              <div class="card-item__cover">
+                <img
+                v-bind:src="'https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/' + currentCardBackground + '.jpeg'" class="card-item__bg">
+              </div>
+              
+              <div class="card-item__wrapper">
+                <div class="card-item__top">
+                  <img src="https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/chip.png" class="card-item__chip">
+                  <div class="card-item__type">
+                    <transition name="slide-fade-up">
+                      <img v-bind:src="'https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/' + getCardType + '.png'" v-if="getCardType" v-bind:key="getCardType" alt="" class="card-item__typeImg">
+                    </transition>
+                  </div>
+                </div>
+                <label for="cardNumber" class="card-item__number" ref="cardNumber">
+                  <template v-if="getCardType === 'amex'">
+                   <span v-for="(n, $index) in amexCardMask" :key="$index">
+                    <transition name="slide-fade-up">
+                      <div
+                        class="card-item__numberItem"
+                        v-if="$index > 4 && $index < 14 && cardNumber.length > $index && n.trim() !== ''"
+                      >*</div>
+                      <div class="card-item__numberItem"
+                        :class="{ '-active' : n.trim() === '' }"
+                        :key="$index" v-else-if="cardNumber.length > $index">
+                        {{cardNumber[$index]}}
+                      </div>
+                      <div
+                        class="card-item__numberItem"
+                        :class="{ '-active' : n.trim() === '' }"
+                        v-else
+                        :key="$index + 1"
+                      >{{n}}</div>
+                    </transition>
+                  </span>
+                  </template>
+  
+                  <template v-else>
+                    <span v-for="(n, $index) in otherCardMask" :key="$index">
+                      <transition name="slide-fade-up">
+                        <div
+                          class="card-item__numberItem"
+                          v-if="$index > 4 && $index < 15 && cardNumber.length > $index && n.trim() !== ''"
+                        >*</div>
+                        <div class="card-item__numberItem"
+                          :class="{ '-active' : n.trim() === '' }"
+                          :key="$index" v-else-if="cardNumber.length > $index">
+                          {{cardNumber[$index]}}
+                        </div>
+                        <div
+                          class="card-item__numberItem"
+                          :class="{ '-active' : n.trim() === '' }"
+                          v-else
+                          :key="$index + 1"
+                        >{{n}}</div>
+                      </transition>
+                    </span>
+                  </template>
+                </label>
+                <div class="card-item__content">
+                  <label for="cardName" class="card-item__info" ref="cardName">
+                    <div class="card-item__holder">Titular Do Cartão</div>
+                    <transition name="slide-fade-up">
+                      <div class="card-item__name" v-if="cardName.length" key="1">
+                        <transition-group name="slide-fade-right">
+                          <span class="card-item__nameItem" v-for="(n, $index) in cardName.replace(/\s\s+/g, ' ')" v-if="$index === $index" v-bind:key="$index + 1">{{n}}</span>
+                        </transition-group>
+                      </div>
+                      <div class="card-item__name" v-else key="2">Nome Completo</div>
+                    </transition>
+                  </label>
+                  <div class="card-item__date" ref="cardDate">
+                    <label for="cardMonth" class="card-item__dateTitle">Validade</label>
+                    <label for="cardMonth" class="card-item__dateItem">
+                      <transition name="slide-fade-up">
+                        <span v-if="cardMonth" v-bind:key="cardMonth">{{cardMonth}}</span>
+                        <span v-else key="2">MM</span>
+                      </transition>
+                    </label>
+                    /
+                    <label for="cardYear" class="card-item__dateItem">
+                      <transition name="slide-fade-up">
+                        <span v-if="cardYear" v-bind:key="cardYear">{{String(cardYear).slice(2,4)}}</span>
+                        <span v-else key="2">YY</span>
+                      </transition>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-item__side -back">
+              
+              <div class="card-item__cover">
+                <img
+                v-bind:src="'https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/' + currentCardBackground + '.jpeg'" class="card-item__bg">
+              </div>
+              <div class="card-item__band"></div>
+              <div class="card-item__cvv">
+                  <div class="card-item__cvvTitle">CVV</div>
+                  <div class="card-item__cvvBand">
+                    <span v-for="(n, $index) in cardCvv" :key="$index">
+                      *
+                    </span>
+  
+                </div>
+                  <div class="card-item__type">
+                      <img v-bind:src="'https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/' + getCardType + '.png'" v-if="getCardType" class="card-item__typeImg">
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-form__inner">
+          <div class="card-input">
+            <label for="cardNumber" class="card-input__label"></label>Numero do Cartão
+            <input type="number" id="cardNumber" class="card-input__input" maxlength="19" v-mask="generateCardNumberMask" v-model="cardNumber" v-on:focus="focusInput" v-on:blur="blurInput" data-ref="cardNumber" autocomplete="off">
+          </div>
+          <div class="card-input">
+            <label for="cardName" class="card-input__label">Nome Impresso no Cartão</label>
+            <input type="text" id="cardName" class="card-input__input" v-model="cardName" v-on:focus="focusInput" v-on:blur="blurInput" data-ref="cardName" autocomplete="off">
+          </div>
+          <div class="card-form__row">
+            <div class="card-form__col">
+              <div class="card-form__group">
+                <label for="cardMonth" class="card-input__label">Data de Validade</label>
+                <select class="card-input__input -select" id="cardMonth" v-model="cardMonth" v-on:focus="focusInput" v-on:blur="blurInput" data-ref="cardDate">
+                  <option value="" disabled selected>Mês</option>
+                  <option v-bind:value="n < 10 ? '0' + n : n" v-for="n in 12" v-bind:disabled="n < minCardMonth" v-bind:key="n">
+                      {{n < 10 ? '0' + n : n}}
+                  </option>
+                </select>
+                <select class="card-input__input -select" id="cardYear" v-model="cardYear" v-on:focus="focusInput" v-on:blur="blurInput" data-ref="cardDate">
+                  <option value="" disabled selected>Ano</option>
+                  <option v-bind:value="$index + minCardYear" v-for="(n, $index) in 12" v-bind:key="n">
+                      {{$index + minCardYear}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="card-form__col -cvv">
+              <div class="card-input">
+                <label for="cardCvv" class="card-input__label">CVV</label>
+                <input type="text" class="card-input__input" id="cardCvv" v-mask="'####'" maxlength="3" v-model="cardCvv" v-on:focus="flipCard(true)" v-on:blur="flipCard(false)" autocomplete="off">
+              </div>
+            </div>
+          </div>
+  
+          <button class="card-form__button">
+            Validar
+          </button>
+        </div>
+      </div>
+      
+      
+    </div>
+    <!-- <form action="">
+      <h1>Dados Pessoais </h1>
+      <div>
+        <label for="nome">Nome completo:</label>
+        <input type="text" id="nome" name="nome" placeholder="Nome">
+      </div>
+      <div>
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" placeholder="E-mail">
+      </div>
+      <div>
+        <label for="document">CPF:</label>
+        <input type="number" id="document" name="document" placeholder="CPF">
+      </div>
+      <div>
+        <p>Quero receber a newsletter da RCHLO!</p>
+        <div>
+          <label for="number">Numero</label>
+          <input type="number" id="number" name="number" placeholder=" Número">
+        </div>
+        <div>
+          <label for="cvv">CVV</label>
+          <input type="cvv" id="cvv" name="cvv" placeholder="CVV">
+        </div>
+        <div>
+          <label for="document">CPF:</label>
+          <input type="document" id="document" name="document" placeholder="CPF">
+        </div>
+        <div>
+          <label for="select"></label>
+          <select id="select" name="select">
+            <option value="mastercart">mastercard</option>
+            <option value="valor2" selected>Valor 2</option>
+            <option value="valor3">Valor 3</option>
+          </select>
+        </div>
+        <div>
+          <label for="select">Validade:</label>
+          <input type="date" name="" id="">
+        </div>
+        <button>Confirmar Pedido</button>
+      </div>
+    </form> -->
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vuelidate@0.7.6/lib/index.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script src="/js/script.js"></script>
+</body>
 
-    <!-- preço do produto -->
-    Preço: R$ 69,90
-<!-- fim dos dados do produto -->
-
-<!-- início do formulário -->
-    <!-- Título da seção de dados pessoais do formulário-->
-    Dados Pessoais
-    Nome completo: <!-- colocar campo de texto aqui -->
-    Email: <!-- colocar campo de email aqui -->
-    CPF:  <!-- colocar campo de texto aqui -->
-    <!-- colocar checkbox aqui --> Quero receber a newsletter da RCHLO!
-
-    <!-- Título da seção de cartão de crédito do formulário-->
-    Cartão de crédito
-    Número - CVV: <!-- colocar campo de texto aqui -->
-    Bandeira: <!-- colocar campo de seleção com as opções MasterCard, VISA e American Express -->
-    Validade: <!-- colocar campo referente ao mês aqui -->
-
-    <!-- botão de submissão do formulário com o label a seguir --> Confirmar Pedido
-<!-- fim do formulário -->
+</html>
