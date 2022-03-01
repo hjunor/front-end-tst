@@ -20,10 +20,10 @@ new Vue({
       isInputFocused: false,
     };
   },
-  mounted() {
-    this.cardNumberTemp = this.otherCardMask;
-    document.getElementById("cardNumber").focus();
-  },
+  // mounted() {
+  //   this.cardNumberTemp = this.otherCardMask;
+  //   document.getElementById("cardNumber").focus();
+  // },
   computed: {
     getCardType() {
       let number = this.cardNumber;
